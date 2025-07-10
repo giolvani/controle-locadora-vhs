@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title layout:title-pattern="$CONTENT_TITLE - VHS Collection">VHS Collection</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vhs-red': '#dc2626',
+                        'vhs-blue': '#1976d2',
+                        'vhs-green': '#16a34a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gray-100 font-sans min-h-screen">
+    <!-- Navigation Header -->
+    <nav class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <h1 class="text-xl font-bold text-gray-900">
+                        📼 VHS Collection
+                    </h1>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="/vhs" class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
+                        Fitas VHS
+                    </a>
+                    <a href="/categorias"
+                        class="text-gray-600 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">
+                        Categorias
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <!-- Page Header -->
+        <div class="mb-6" layout:fragment="pageHeader">
+            <h1 class="text-3xl font-bold text-gray-900">Default Page Title</h1>
+            <p class="mt-2 text-gray-600">Default page description</p>
+        </div>
+
+        <!-- Content Block - Layout Dialect: child templates inject content via layout:fragment -->
+        <div layout:fragment="content">
+            <!-- O conteúdo da página filha será inserido aqui -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-6xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+            <div class="text-center text-gray-500 text-sm">
+                <p>&copy; 2024 VHS Collection System. Sistema de Controle de Locadora.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,98 @@
+<html layout:decorate="~{layout/base}">
+
+<head>
+    <title>Lista de Fitas VHS</title>
+</head>
+
+<body>
+    <div layout:fragment="pageHeader">
+        <h1 class="text-3xl font-bold text-gray-900">Fitas VHS</h1>
+        <p class="mt-2 text-gray-600">Gerencie sua coleção de fitas VHS</p>
+    </div>
+    <section layout:fragment="content">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">📼 Listagem de Fitas VHS</h2>
+                <a href="/vhs/novo"
+                    class="inline-flex items-center px-4 py-2 bg-vhs-green text-white font-medium rounded-lg hover:bg-green-700 transition-colors duration-200 shadow-md">
+                    ➕ Adicionar Nova Fita
+                </a>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full border-collapse">
+                    <thead>
+                        <tr class="bg-gray-50">
+                            <th
+                                class="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b border-gray-200">
+                                Título
+                            </th>
+                            <th
+                                class="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b border-gray-200">
+                                Imagem
+                            </th>
+                            <th
+                                class="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b border-gray-200">
+                                Data de Registro
+                            </th>
+                            <th
+                                class="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b border-gray-200">
+                                Categoria
+                            </th>
+                            <th
+                                class="px-4 py-3 text-left text-sm font-semibold text-gray-700 border-b border-gray-200">
+                                Ações
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="vhs : ${vhsList}" class="hover:bg-gray-50 transition-colors duration-200">
+                            <td th:text="${vhs.title}"
+                                class="px-4 py-3 text-sm text-gray-900 border-b border-gray-200 font-medium">
+                                Título
+                            </td>
+                            <td class="px-4 py-3 text-sm text-gray-600 border-b border-gray-200">
+                                <img th:src="${vhs.imageUrl}" alt="VHS Cover"
+                                    class="w-12 h-16 object-cover rounded shadow-sm"
+                                    onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA0OCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjQ4IiBoZWlnaHQ9IjY0IiBmaWxsPSIjRjNGNEY2Ii8+CjxwYXRoIGQ9Ik0yNCAzMkMyNiAzMiAyOCAzMCAyOCAyOEMyOCAyNiAyNiAyNCAyNCAyNEMyMiAyNCAyMCAyNiAyMCAyOEMyMCAzMCAyMiAzMiAyNCAzMloiIGZpbGw9IiM5Q0EzQUYiLz4KPC9zdmc+'" />
+                            </td>
+                            <td th:text="${#temporals.format(vhs.registrationDate, 'dd/MM/yyyy')}"
+                                class="px-4 py-3 text-sm text-gray-600 border-b border-gray-200">
+                                Data de registro
+                            </td>
+                            <td th:text="${vhs.categoria?.nome ?: 'Sem categoria'}"
+                                class="px-4 py-3 text-sm text-gray-600 border-b border-gray-200">
+                                Categoria
+                            </td>
+                            <td class="px-4 py-3 text-sm border-b border-gray-200">
+                                <div class="flex space-x-2">
+                                    <a th:href="@{'/vhs/editar/' + ${vhs.id}}"
+                                        class="inline-flex items-center px-3 py-1.5 bg-vhs-blue text-white text-xs font-medium rounded hover:bg-blue-700 transition-colors duration-200">
+                                        ✏️ Editar
+                                    </a>
+                                    <a th:href="@{'/vhs/deletar/' + ${vhs.id}}"
+                                        onclick="return confirm('Tem certeza que deseja deletar esta fita?');"
+                                        class="inline-flex items-center px-3 py-1.5 bg-vhs-red text-white text-xs font-medium rounded hover:bg-red-700 transition-colors duration-200">
+                                        🗑️ Excluir
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div th:if="${#lists.isEmpty(vhsList)}" class="text-center py-12">
+                    <div class="text-6xl mb-4">📼</div>
+                    <h3 class="text-lg font-medium text-gray-900 mb-2">Nenhuma fita VHS encontrada</h3>
+                    <p class="text-gray-500 mb-4">Comece adicionando sua primeira fita VHS à coleção.</p>
+                    <a href="/vhs/novo"
+                        class="inline-flex items-center px-4 py-2 bg-vhs-green text-white font-medium rounded-lg hover:bg-green-700 transition-colors duration-200">
+                        ➕ Adicionar Primeira Fita
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</html>
