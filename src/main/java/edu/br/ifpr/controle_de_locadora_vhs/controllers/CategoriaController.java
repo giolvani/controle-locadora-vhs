@@ -16,7 +16,7 @@ import edu.br.ifpr.controle_de_locadora_vhs.entities.Categoria;
 import edu.br.ifpr.controle_de_locadora_vhs.services.CategoriaService;
 
 @Controller
-@RequestMapping("/categoria")
+@RequestMapping("/categorias")
 public class CategoriaController {
 
     @Autowired
@@ -27,14 +27,14 @@ public class CategoriaController {
     public String findAll(Model model) {
         List<Categoria> categoriaList = categoriaService.findAll();
         model.addAttribute("categoriaList", categoriaList);
-        return "categoria-lista";
+        return "categoria/lista";
     }
 
     // formulario para nova categoria
-    @GetMapping("/nova")
+    @GetMapping("/adicionar")
     public String novaCategoria(Model model) {
         model.addAttribute("categoria", new Categoria());
-        return "categoria-form";
+        return "categoria/form";
     }
 
     // salvar categoria
@@ -42,11 +42,11 @@ public class CategoriaController {
     public String salvarCategoria(@ModelAttribute Categoria categoria, RedirectAttributes attributes) {
         try {
             categoriaService.save(categoria);
-            attributes.addFlashAttribute("Categoria salva com sucesso!");
+            attributes.addFlashAttribute("mensagemSucesso", "Categoria salva com sucesso!");
         } catch (Exception e) {
-            attributes.addFlashAttribute("Erro ao salvar categoria: " + e.getMessage());
+            attributes.addFlashAttribute("mensagemErro", "Erro ao salvar categoria: " + e.getMessage());
         }
-        return "redirect:/categoria";
+        return "redirect:/categorias";
     }
 
     // editar categoria
@@ -54,10 +54,10 @@ public class CategoriaController {
     public String exibirFormularioEdicao(@PathVariable Long id, Model model, RedirectAttributes attributes) {
         return categoriaService.findById(id).map(categoria -> {
             model.addAttribute("categoria", categoria);
-            return "categoria-form"; // Reutiliza o template do formulário
+            return "categoria/form";
         }).orElseGet(() -> {
             attributes.addFlashAttribute("mensagemErro", "Categoria não encontrada.");
-            return "redirect:/categoria";
+            return "redirect:/categorias";
         });
     }
 
@@ -66,10 +66,10 @@ public class CategoriaController {
     public String excluirCategoria(@PathVariable Long id, RedirectAttributes attributes) {
         try {
             categoriaService.deleteById(id);
-            attributes.addFlashAttribute("Categoria excluída com sucesso!");
-        } catch (RuntimeException e) { // Captura exceções de regra de negócio, como categoria com VHS associada
-            attributes.addFlashAttribute("Erro ao excluir categoria: " + e.getMessage());
+            attributes.addFlashAttribute("mensagemSucesso", "Categoria excluída com sucesso!");
+        } catch (RuntimeException e) {
+            attributes.addFlashAttribute("mensagemErro", "Erro ao excluir categoria: " + e.getMessage());
         }
-        return "redirect:/categoria"; // Redireciona para a lista
+        return "redirect:/categorias";
     }
 }

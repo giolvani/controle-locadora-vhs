@@ -13,10 +13,10 @@ import edu.br.ifpr.controle_de_locadora_vhs.repositories.VHSRepository;
 
 @Service
 public class CategoriaService {
-    
+
     @Autowired
     private CategoriaRepository categoriaRepository;
-    
+
     @Autowired
     private VHSRepository vhsRepository;
 
@@ -41,8 +41,8 @@ public class CategoriaService {
 
     public void deleteById(Long id) {
         List<VHS> fitasAssociadas = vhsRepository.findByCategoriaId(id); // Precisaria de um método no VHSRepository
-            if (!fitasAssociadas.isEmpty()) {
-                throw new RuntimeException("Não é possível excluir a categoria pois há fitas VHS associadas a ela.");
+        if (!fitasAssociadas.isEmpty()) {
+            throw new RuntimeException("Não é possível excluir a categoria pois há fitas VHS associadas a ela.");
         }
         categoriaRepository.deleteById(id);
     }
