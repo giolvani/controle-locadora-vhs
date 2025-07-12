@@ -10,10 +10,12 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "vhs")
 public class VHS {
 
     @Id
@@ -33,12 +35,10 @@ public class VHS {
     private TapeStatus status;
 
     public Object getDataCadastro() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getDataCadastro'");
     }
 
     public void setDataCadastro(LocalDate now) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'setDataCadastro'");
     }
 
