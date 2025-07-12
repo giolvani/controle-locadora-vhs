@@ -13,7 +13,8 @@ import edu.br.ifpr.controle_de_locadora_vhs.entities.VHS;
 @Repository
 public interface VHSRepository extends JpaRepository<VHS, Long> {
 
-    List<VHS> findByCategoriaId(Long id);
+    @Query("SELECT v FROM VHS v JOIN v.categorias c WHERE c.id = :categoriaId")
+    List<VHS> findByCategoriaId(@Param("categoriaId") Long categoriaId);
 
     List<VHS> findByTitle(String title);
 

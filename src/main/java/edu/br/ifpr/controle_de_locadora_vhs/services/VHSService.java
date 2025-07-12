@@ -40,7 +40,7 @@ public class VHSService {
             existingVhs.setTitle(vhs.getTitle());
             existingVhs.setImageUrl(vhs.getImageUrl());
             existingVhs.setDiretor(vhs.getDiretor());
-            existingVhs.setCategoria(vhs.getCategoria());
+            existingVhs.setCategorias(vhs.getCategorias());
             existingVhs.setStatus(vhs.getStatus());
 
             return vhsRepository.save(existingVhs);

@@ -100,28 +100,33 @@
                         </p>
                     </div>
 
-                    <!-- Categoria -->
+                    <!-- Categorias -->
                     <div>
-                        <label for="categoria" class="block text-sm font-medium text-gray-700 mb-2">
-                            Categoria <span class="text-red-500">*</span>
+                        <label for="categorias" class="block text-sm font-medium text-gray-700 mb-2">
+                            Categorias <span class="text-red-500">*</span>
                         </label>
-                        <select th:field="*{categoria}" id="categoria" name="categoria" required
-                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vhs-green focus:border-transparent transition-colors duration-200 text-gray-900">
-                            <option value="">Selecione uma categoria</option>
-                            <option th:each="categoria : ${categorias}" th:value="${categoria.id}"
-                                th:text="${categoria.nome}"
-                                th:selected="${vhs.categoria != null and vhs.categoria.id == categoria.id}">
+                        <select th:field="*{categorias}" 
+                                id="categorias" 
+                                name="categorias"
+                                multiple
+                                required
+                                size="4"
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vhs-green focus:border-transparent transition-colors duration-200 text-gray-900">
+                            <option th:each="categoria : ${categorias}" 
+                                    th:value="${categoria.id}" 
+                                    th:text="${categoria.nome}"
+                                    th:selected="${vhs.categorias != null and #lists.contains(vhs.categorias, categoria)}">
                                 Categoria
                             </option>
                         </select>
-
+                        
                         <!-- Validation error display -->
-                        <div th:if="${#fields.hasErrors('categoria')}" class="mt-2">
-                            <p class="text-sm text-red-600" th:errors="*{categoria}">Categoria é obrigatória</p>
+                        <div th:if="${#fields.hasErrors('categorias')}" class="mt-2">
+                            <p class="text-sm text-red-600" th:errors="*{categorias}">Pelo menos uma categoria é obrigatória</p>
                         </div>
-
+                        
                         <p class="mt-2 text-sm text-gray-500">
-                            Selecione a categoria que melhor descreve o filme
+                            Selecione uma ou mais categorias que descrevem o filme (Ctrl+Click para múltipla seleção)
                         </p>
                     </div>
 
