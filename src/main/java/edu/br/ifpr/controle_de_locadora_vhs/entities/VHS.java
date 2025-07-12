@@ -2,6 +2,7 @@ package edu.br.ifpr.controle_de_locadora_vhs.entities;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -25,6 +26,8 @@ public class VHS {
     private String title;
     private String imageUrl; // Caminho ou URL da imagem (opcional)
     private String diretor;
+    
+    @Column(name = "data_cadastro")
     private LocalDate registrationDate;
 
     @ManyToOne
@@ -33,14 +36,6 @@ public class VHS {
 
     @Enumerated(EnumType.STRING)
     private TapeStatus status;
-
-    public Object getDataCadastro() {
-        throw new UnsupportedOperationException("Unimplemented method 'getDataCadastro'");
-    }
-
-    public void setDataCadastro(LocalDate now) {
-        throw new UnsupportedOperationException("Unimplemented method 'setDataCadastro'");
-    }
 
     public enum TapeStatus {
         DISPONIVEL,

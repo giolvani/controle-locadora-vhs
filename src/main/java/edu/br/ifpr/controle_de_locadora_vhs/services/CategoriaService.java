@@ -40,7 +40,7 @@ public class CategoriaService {
     }
 
     public void deleteById(Long id) {
-        List<VHS> fitasAssociadas = vhsRepository.findByCategoriaId(id); // Precisaria de um método no VHSRepository
+        List<VHS> fitasAssociadas = vhsRepository.findByCategoriaId(id);
         if (!fitasAssociadas.isEmpty()) {
             throw new RuntimeException("Não é possível excluir a categoria pois há fitas VHS associadas a ela.");
         }

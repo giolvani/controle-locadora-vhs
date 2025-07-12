@@ -21,8 +21,8 @@ public class VHSService {
     }
 
     public VHS save(VHS vhs) {
-        if (vhs.getDataCadastro() == null) {
-            vhs.setDataCadastro(LocalDate.now());
+        if (vhs.getRegistrationDate() == null) {
+            vhs.setRegistrationDate(LocalDate.now());
         }
         return vhsRepository.save(vhs);
     }
@@ -36,14 +36,14 @@ public class VHSService {
     }
 
     public VHS update(Long id, VHS vhs) {
-        return vhsRepository.findById(id).map(vhsup -> {
-            vhs.setTitle(vhsup.getTitle());
-            vhs.setImageUrl(vhsup.getImageUrl());
-            vhs.setDiretor(vhsup.getDiretor());
-            vhs.setCategoria(vhsup.getCategoria());
-            vhs.setStatus(vhsup.getStatus());
+        return vhsRepository.findById(id).map(existingVhs -> {
+            existingVhs.setTitle(vhs.getTitle());
+            existingVhs.setImageUrl(vhs.getImageUrl());
+            existingVhs.setDiretor(vhs.getDiretor());
+            existingVhs.setCategoria(vhs.getCategoria());
+            existingVhs.setStatus(vhs.getStatus());
 
-            return vhsRepository.save(vhs);
+            return vhsRepository.save(existingVhs);
         }).orElseThrow(() -> new RuntimeException("Fita VHS não encontrada com o ID: " + id));
     }
 }
