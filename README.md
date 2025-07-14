@@ -84,5 +84,17 @@ A interface ficou moderna, responsiva e de fácil uso.
 
 1. Clone o projeto:
 ```bash
-git clone <https://github.com/andrieli-lopes-web-iii/controle-de-locadora-vhs>
-cd controle-de-locadora-vhs
+git clone <https://github.com/giolvani/controle-locadora-vhs>
+cd controle-locadora-vhs
+```
+
+2. Altere o arquivo `application.properties` para configurar o banco de dados.
+
+3. Execute o projeto:
+```bash
+mvn spring-boot:run
+
+ou, inicie o projeto com o IDE
+```
+
+4. Acesse o site em `http://localhost:8081`.
