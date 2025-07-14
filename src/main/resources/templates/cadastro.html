@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Usuário - VHS Control</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'vhs-red': '#dc2626',
+                        'vhs-blue': '#1976d2',
+                        'vhs-green': '#16a34a'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">Crie sua Conta</h1>
+        <p class="text-center text-gray-600 mb-8">Gerencie suas fitas VHS de forma fácil e rápida!</p>
+
+        <div th:if="${erro}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <span th:text="${erro}">Erro ao cadastrar.</span>
+        </div>
+
+        <form th:action="@{/cadastro}" method="post" class="space-y-6">
+            <div>
+                <label for="nome" class="block text-sm font-medium text-gray-700 mb-2">Nome Completo</label>
+                <input type="text" id="nome" name="nome" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vhs-green focus:border-transparent text-gray-900 placeholder-gray-500" placeholder="Seu nome completo">
+            </div>
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                <input type="email" id="email" name="email" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vhs-green focus:border-transparent text-gray-900 placeholder-gray-500" placeholder="seuemail@exemplo.com">
+            </div>
+            <div>
+                <label for="senha" class="block text-sm font-medium text-gray-700 mb-2">Senha</label>
+                <input type="password" id="senha" name="senha" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-vhs-green focus:border-transparent text-gray-900 placeholder-gray-500" placeholder="Sua senha secreta">
+            </div>
+            <button type="submit" class="w-full bg-vhs-green text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition-colors duration-200 shadow-md">
+                Cadastrar
+            </button>
+        </form>
+
+        <p class="mt-6 text-center text-gray-600 text-sm">
+            Já tem uma conta? <a th:href="@{/login}" class="font-medium text-vhs-blue hover:underline">Faça Login aqui</a>
+        </p>
+    </div>
+</body>
+</html>
