@@ -33,7 +33,7 @@ public class LoginController {
 
         if (usuario != null) {
             session.setAttribute("usuarioLogado", usuario);
-            return "redirect:/vhs"; // Redireciona para a página de listagem de VHS após o login
+            return "redirect:/";
         } else {
             model.addAttribute("erro", "Usuário ou senha inválidos.");
             return "login";
