@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import edu.br.ifpr.controle_de_locadora_vhs.entities.Usuario;
 import edu.br.ifpr.controle_de_locadora_vhs.services.UsuarioService;
@@ -57,11 +58,11 @@ public class LoginController {
             @RequestParam String nome,
             @RequestParam String email,
             @RequestParam String senha,
-            Model model) {
+            RedirectAttributes redirectAttributes) {
 
         if (usuarioService.findByEmail(email) != null) {
-            model.addAttribute("erro", "E-mail já cadastrado.");
-            return "cadastro";
+            redirectAttributes.addFlashAttribute("erro", "E-mail já cadastrado.");
+            return "redirect:/cadastro";
         }
 
         Usuario usuario = new Usuario();
@@ -71,6 +72,7 @@ public class LoginController {
 
         usuarioService.salvarUsuario(usuario);
 
+        redirectAttributes.addFlashAttribute("sucesso", "Usuário cadastrado com sucesso.");
         return "redirect:/login";
     }
 
