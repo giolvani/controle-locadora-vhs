@@ -29,13 +29,21 @@ public class CategoriaService {
     }
 
     public Categoria save(Categoria categoria) {
+        Optional<Categoria> existingCategoria = categoriaRepository.findByNomeIgnoreCase(categoria.getNome());
+        if (existingCategoria.isPresent()) {
+            throw new RuntimeException("Já existe uma categoria com o nome: " + categoria.getNome());
+        }
         return categoriaRepository.save(categoria);
     }
 
     public Categoria update(Long id, Categoria categoria) {
         return categoriaRepository.findById(id).map(cat -> {
-            categoria.setNome(cat.getNome());
-            return categoriaRepository.save(categoria);
+            Optional<Categoria> existingCategoria = categoriaRepository.findByNomeIgnoreCaseAndIdNot(categoria.getNome(), id);
+            if (existingCategoria.isPresent()) {
+                throw new RuntimeException("Já existe uma categoria com o nome: " + categoria.getNome());
+            }
+            cat.setNome(categoria.getNome());
+            return categoriaRepository.save(cat);
         }).orElseThrow(() -> new RuntimeException("Categoria não encontrada com o ID: " + id));
     }
 
